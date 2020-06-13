@@ -1,0 +1,194 @@
+[
+    {
+        "decomposition_type": "intersection",
+        "question": "\" Домострой \" написан S в том же веке, в котором S был построен Новодевичий монастырь в Москве ?"
+    },
+    {
+        "decomposition_type": "bridge",
+        "question": "В каком веке жил S автор \" Хождения за три моря \" S ?"
+    },
+    {
+        "decomposition_type": "intersection",
+        "question": "Поучение детям написано S в том же веке , в котором S Москва была впервые упомянута в летописи ?"
+    },
+    {
+        "decomposition_type": "intersection",
+        "question": "Картина \" Утро стрелецкой казни \" написана S в тот же год , в котором S Александр II был убит народовольцами ?"
+    },
+    {
+        "decomposition_type": "intersection",
+        "question": "Фильмы \" Берегись автомобиля \" S и S \" Служебный роман \" сняты одним режиссером ?"
+    },
+    {
+        "decomposition_type": "intersection",
+        "question": "Успенский собор создан S в том же веке , что и S икона Троица ?"
+    },
+    {
+        "decomposition_type": "intersection",
+        "question": "Оперы \" Снегурочка \" S и S \" Садко \" принадлежат одному и тому же автору ?"
+    },
+    {
+        "decomposition_type": "bridge",
+        "question": "Дата рождения S режиссера \" Веселых ребят \" S ?"
+    },
+    {
+        "decomposition_type": "intersection",
+        "question": "Автор \" Хождения по мукам \" S и S \" Мастер и Маргарита \" – это один и тот же человек или нет ?"
+    },
+    {
+        "decomposition_type": "bridge",
+        "question": "Был ли S автор \"Тихого Дона\" S нормирован на Нобелевскую Премию по литературе ?"
+    },
+    {
+        "decomposition_type": "comparison",
+        "question": "Шуховская башня была построена S раньше , чем S написан \" Тихий дон \" ?"
+    },
+    {
+        "decomposition_type": "bridge",
+        "question": "В каком году умер S автор поэмы \" Хорошо \" S ?"
+    },
+    {
+        "decomposition_type": "intersection",
+        "question": "Большой Кремлевский дворец S и S Храм Христа Спасителя построены одним архитектором ?"
+    },
+    {
+        "decomposition_type": "intersection",
+        "question": "Произведения \" Недоросль \" S и S \" Бригадир \" принадлежат одному автору ?"
+    },
+    {
+        "decomposition_type": "intersection",
+        "question": "Бедная Лиза написана S в том же веке , что и S \" Путешествие из Петербурга в Москву \" ?"
+    },
+    {
+        "decomposition_type": "bridge",
+        "question": "В каком году родился S автор \" Путешествия из Петербурга в Москву \" S ?"
+    },
+    {
+        "decomposition_type": "intersection",
+        "question": "Картины \" Грачи прилетели \" S и S \" Утро в сосновом лесу \" написал один и тот же человек ?"
+    },
+    {
+        "decomposition_type": "intersection",
+        "question": "\"Девятый вал\" S и S \"Лунная ночь на Капри\" – один автор ?"
+    },
+    {
+        "decomposition_type": "bridge",
+        "question": "Где был рожден S автор картины \"Иван-царевич на сером волке\" S ?"
+    },
+    {
+        "decomposition_type": "bridge",
+        "question": "В каком городе родился S автор Черного квадрата S ?"
+    },
+    {
+        "decomposition_type": "intersection",
+        "question": "\" Господа Головлёвы \" S и S \" Кому на Руси жить хорошо \" написаны одним и тем же автором ?"
+    },
+    {
+        "decomposition_type": "bridge",
+        "question": "В каком городе родился S автор \" Доктор Живаго \" S ?"
+    },
+    {
+        "decomposition_type": "bridge",
+        "question": "В каком веке родился S автор книги \" История государства Российского \" S ?"
+    },
+    {
+        "decomposition_type": "comparison",
+        "question": "Первый в истории визит руководителя СССР в США произошел S после S Карибского кризиса ?"
+    },
+    {
+        "decomposition_type": "intersection",
+        "question": "Фашистская Германия напала на Польшу S в тот же год , когда S состоялась советско - финляндская война ?"
+    },
+    {
+        "decomposition_type": "intersection",
+        "question": "Застал ли Александр II S S реформы Столыпина ?"
+    },
+    {
+        "decomposition_type": "intersection",
+        "question": "Верно ли , что Парижская коммуна S и S Германская империя были провозглашены в один год ?"
+    },
+    {
+        "decomposition_type": "intersection",
+        "question": "Существовала ли Австро-Венгрия S во время S венгерского похода русской армии ?"
+    },
+    {
+        "decomposition_type": "comparison",
+        "question": "Рабство в США отменили S раньше , чем S крепостное право – в России ?"
+    },
+    {
+        "decomposition_type": "comparison",
+        "question": "Могучая кучка возникла S до S отмены крепостного права в России ?"
+    },
+    {
+        "decomposition_type": "comparison",
+        "question": "Финляндия вошла в состав Российской империи S раньше , чем S Средняя Азия ?"
+    },
+    {
+        "decomposition_type": "comparison",
+        "question": "Битва при Аустерлице состоялась S после S отмены крепостного права ?"
+    },
+    {
+        "decomposition_type": "comparison",
+        "question": "Конституция США была принята S после S Великой французской революции ?"
+    },
+    {
+        "decomposition_type": "intersection",
+        "question": "Независимость США была провозглашена S в том же году , в котором S была принята конституция США ?"
+    },
+    {
+        "decomposition_type": "intersection",
+        "question": "Московский университет был основан S в том же году , что и S Санкт-Петербургский ?"
+    },
+    {
+        "decomposition_type": "comparison",
+        "question": "Колумб открыл Америку S раньше , чем S Магеллан совершил кругосветное путешествие ?"
+    },
+    {
+        "decomposition_type": "comparison",
+        "question": "Тверское княжество было присоединено к Московскому S раньше S Новгорода ?"
+    },
+    {
+        "decomposition_type": "comparison",
+        "question": "Какое из двух перечисленных событий произошло позже : Ледовое побоище S или S Невская битва ?"
+    },
+    {
+        "decomposition_type": "intersection",
+        "question": "Князь Игорь погиб S S во время восстания древлян ?"
+    },
+    {
+        "decomposition_type": "comparison",
+        "question": "Что произошло раньше , основание Киева S или S возникновение ислама ?"
+    },
+    {
+        "decomposition_type": "intersection",
+        "question": "Синопское сражение S и S сражение при Четати состоялись в один год – это правда ?"
+    },
+    {
+        "decomposition_type": "intersection",
+        "question": "Соляной S и S медный бунты произошли в одно и то же время ?"
+    },
+    {
+        "decomposition_type": "intersection",
+        "question": "Адрианопольский S и S Константинопольский мирные договора были подписаны одинаковыми сторонами ?"
+    },
+    {
+        "decomposition_type": "intersection",
+        "question": "Мадридский договор был заключен S теми же правителями , что и S Камбрейский мир ?"
+    },
+    {
+        "decomposition_type": "intersection",
+        "question": "Страны , S подписавшие Пражский мир , S участвовали в подписании Парижского мирного договора ?"
+    },
+    {
+        "decomposition_type": "comparison",
+        "question": "Версальский договор подписан S после S Первой мировой ?"
+    },
+    {
+        "decomposition_type": "intersection",
+        "question": "Страны , S подписавшие Абоский мир , S принимали участие в Семилетней войне ?"
+    },
+    {
+        "decomposition_type": "comparison",
+        "question": "Портсмутский мирный договор подписан S после S завершения русско-японской войны ?"
+    }
+]
