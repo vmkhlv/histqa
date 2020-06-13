@@ -1,6 +1,1 @@
-__all__ = [
-    'elmo',
-    'model',
-    'ner',
-    'morph'
-]
+__all__ = ["elmo", "model", "ner", "morph"]

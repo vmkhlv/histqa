@@ -19,8 +19,10 @@ class Morph:
     def build_vocab(self, from_entity_list):
         return [
             [
-                self.m.parse(e)[0].normal_form for e in self.tokenizer.tokenize(ent.lower())
-            ] for ent in from_entity_list
+                self.m.parse(e)[0].normal_form
+                for e in self.tokenizer.tokenize(ent.lower())
+            ]
+            for ent in from_entity_list
         ]
 
     def index_annotate(self, text):
@@ -43,12 +45,17 @@ class Morph:
                         left_ngram = max(i - window_size + 1, 0)
                         right_ngram = min(i + window_size, len(tokenized) - 1)
                         window = tokenized[left_ngram:right_ngram]
-                        window_lemmas = [self.m.parse(token)[0].normal_form for token in window]
+                        window_lemmas = [
+                            self.m.parse(token)[0].normal_form for token in window
+                        ]
                         candidate_len = len(candidate)
                         for j in range(len(window_lemmas)):
-                            curr_stride = window_lemmas[j:j + candidate_len]
+                            curr_stride = window_lemmas[j : j + candidate_len]
                             # reduce stride space
-                            if len(curr_stride) >= candidate_len and curr_stride == candidate:
+                            if (
+                                len(curr_stride) >= candidate_len
+                                and curr_stride == candidate
+                            ):
                                 if candidate_len > 2:
                                     if tags[i] == OUTSIDE_TOKEN:
                                         tags[i] = START_TOKEN
@@ -61,5 +68,7 @@ class Morph:
                                     tags[i + j] = INSIDE_TOKEN
                                 else:
                                     tags[i] = INSIDE_TOKEN
-        return {"text": " ".join([t for t in tokenized if t != FILLER]),
-                "tags": tags[self.max_len:]}
+        return {
+            "text": " ".join([t for t in tokenized if t != FILLER]),
+            "tags": tags[self.max_len :],
+        }

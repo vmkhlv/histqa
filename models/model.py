@@ -12,7 +12,9 @@ def tile(tensor, shape, dim):
     repeat_idx = [1] * tensor.dim()
     repeat_idx[dim] = shape
     tensor = tensor.repeat(*(repeat_idx))
-    order_index = torch.LongTensor(torch.cat([init_dim * torch.arange(shape) + i for i in range(init_dim)]))
+    order_index = torch.LongTensor(
+        torch.cat([init_dim * torch.arange(shape) + i for i in range(init_dim)])
+    )
     return torch.index_select(tensor, dim, order_index)
 
 
@@ -26,8 +28,15 @@ def flatten(x, max_len, elmo_num_layers=3, elmo_layer_dim=1024, shape=-1):
 
 
 class QueryDecoder(torch.nn.Module):
-    def __init__(self, input_dim=3072, hidden_dim1=256, hidden_dim2=128, num_layers=2, max_query_size=25,
-                 dropout_rate=0.35):
+    def __init__(
+        self,
+        input_dim=3072,
+        hidden_dim1=256,
+        hidden_dim2=128,
+        num_layers=2,
+        max_query_size=25,
+        dropout_rate=0.35,
+    ):
         super(QueryDecoder, self).__init__()
         self.input_dim = input_dim
         self.hidden_dim1 = hidden_dim1
@@ -35,10 +44,20 @@ class QueryDecoder(torch.nn.Module):
         self.num_layers = num_layers
         self.max_query_size = max_query_size
         self.dropout_rate = dropout_rate
-        self.lstm1 = torch.nn.LSTM(input_size=self.input_dim, hidden_size=self.hidden_dim1,
-                                   num_layers=self.num_layers, batch_first=True, bidirectional=True)
-        self.lstm2 = torch.nn.LSTM(input_size=self.hidden_dim1 * self.num_layers, hidden_size=self.hidden_dim2,
-                                   num_layers=self.num_layers, batch_first=True, bidirectional=True)
+        self.lstm1 = torch.nn.LSTM(
+            input_size=self.input_dim,
+            hidden_size=self.hidden_dim1,
+            num_layers=self.num_layers,
+            batch_first=True,
+            bidirectional=True,
+        )
+        self.lstm2 = torch.nn.LSTM(
+            input_size=self.hidden_dim1 * self.num_layers,
+            hidden_size=self.hidden_dim2,
+            num_layers=self.num_layers,
+            batch_first=True,
+            bidirectional=True,
+        )
         self.dropout = torch.nn.Dropout(self.dropout_rate)
 
     def forward(self, query):
@@ -50,7 +69,9 @@ class QueryDecoder(torch.nn.Module):
 
 
 class CandidateDecoder(torch.nn.Module):
-    def __init__(self, input_dim=3072, hidden_dim=256, max_nodes=250, dropout_rate=0.35):
+    def __init__(
+        self, input_dim=3072, hidden_dim=256, max_nodes=250, dropout_rate=0.35
+    ):
         super(CandidateDecoder, self).__init__()
         self.input_dim = input_dim
         self.hidden_dim = hidden_dim
@@ -93,8 +114,16 @@ class RGCN(torch.nn.Module):
 
 
 class NodeClassifier(torch.nn.Module):
-    def __init__(self, input_dim=768, hidden_dim1=256, hidden_dim2=128, output_dim=1,
-                 batch_size=32, max_candidates=25, max_nodes=250):
+    def __init__(
+        self,
+        input_dim=768,
+        hidden_dim1=256,
+        hidden_dim2=128,
+        output_dim=1,
+        batch_size=32,
+        max_candidates=25,
+        max_nodes=250,
+    ):
         super(NodeClassifier, self).__init__()
         self.input_dim = input_dim
         self.hidden_dim1 = hidden_dim1
@@ -116,16 +145,21 @@ class NodeClassifier(torch.nn.Module):
         x2 = torch.where(
             x2.eq(torch.tensor(0, dtype=torch.float32)),
             torch.from_numpy(
-                (np.ones((self.batch_size, self.max_candidates, self.max_nodes)) * -np.inf).astype(np.float32)
+                (
+                    np.ones((self.batch_size, self.max_candidates, self.max_nodes))
+                    * -np.inf
+                ).astype(np.float32)
             ),
-            x2
+            x2,
         )
         x2 = torch.max(x2, -1).values
         return x2
 
 
 class HistQANet(torch.nn.Module):
-    def __init__(self, max_nodes=250, max_query_size=25, max_candidates=25, batch_size=32):
+    def __init__(
+        self, max_nodes=250, max_query_size=25, max_candidates=25, batch_size=32
+    ):
         super(HistQANet, self).__init__()
         self.max_nodes = max_nodes
         self.max_query_size = max_query_size
@@ -133,7 +167,11 @@ class HistQANet(torch.nn.Module):
         self.query_decoder = QueryDecoder(max_query_size=self.max_query_size)
         self.candidate_decoder = CandidateDecoder(max_nodes=self.max_nodes)
         self.rgcn = RGCN()
-        self.clf = NodeClassifier(max_nodes=self.max_nodes, max_candidates=self.max_candidates, batch_size=batch_size)
+        self.clf = NodeClassifier(
+            max_nodes=self.max_nodes,
+            max_candidates=self.max_candidates,
+            batch_size=batch_size,
+        )
 
     def read_batch(self, x):
         self.nodes = torch.tensor(x["nodes"])
@@ -146,7 +184,8 @@ class HistQANet(torch.nn.Module):
     def create_mask(self):
         nodes_mask = tile(
             torch.unsqueeze(torch.arange(self.max_nodes, dtype=torch.int32), 0),
-            self.nodes_length.size()[0], 0
+            self.nodes_length.size()[0],
+            0,
         ) < torch.unsqueeze(self.nodes_length, -1)
         return nodes_mask.float()
 
@@ -155,8 +194,12 @@ class HistQANet(torch.nn.Module):
         decoded_cand = self.candidate_decoder.forward(self.nodes)
         nodes_mask = self.create_mask()
         nodes = torch.cat(
-            ((decoded_cand), tile(decoded_query, self.max_nodes // self.max_query_size, 1)),
-            -1) * tile(torch.unsqueeze(nodes_mask, -1), 512, -1)
+            (
+                (decoded_cand),
+                tile(decoded_query, self.max_nodes // self.max_query_size, 1),
+            ),
+            -1,
+        ) * tile(torch.unsqueeze(nodes_mask, -1), 512, -1)
         return nodes, nodes_mask, decoded_query
 
     def forward(self, x, hop_num=1):
@@ -165,7 +208,8 @@ class HistQANet(torch.nn.Module):
         for hop in range(hop_num):
             last_hop = self.rgcn.hop_layer(nodes, nodes_mask, self.adj)
         x = torch.cat(
-            (last_hop, tile(decoded_query, self.max_nodes // self.max_query_size, 1)), -1
+            (last_hop, tile(decoded_query, self.max_nodes // self.max_query_size, 1)),
+            -1,
         ) * torch.unsqueeze(nodes_mask, -1)
         prediction = self.clf(x, self.bmask)
         return prediction

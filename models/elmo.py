@@ -5,7 +5,10 @@ from .utils import singleton
 
 @singleton
 class ElmoEmbedder:
-    def __init__(self, hub_url="http://files.deeppavlov.ai/deeppavlov_data/elmo_ru-wiki_600k_steps.tar.gz"):
+    def __init__(
+        self,
+        hub_url="http://files.deeppavlov.ai/deeppavlov_data/elmo_ru-wiki_600k_steps.tar.gz",
+    ):
         self.hub_url = hub_url
         self.device = tf.test.gpu_device_name()
         self.elmo_model, self.graph = self.initialize_model()
@@ -25,10 +28,7 @@ class ElmoEmbedder:
             if len(batch_elem) < max_elem:
                 batch_elem = batch_elem + [""] * (max_elem - len(batch_elem))
             batch_elems.append(batch_elem)
-        return {
-            "tokens": batch_elems,
-            "sequence_len": batch_lens
-        }
+        return {"tokens": batch_elems, "sequence_len": batch_lens}
 
     def batch_to_embeddings(self, batch):
         """
@@ -40,7 +40,9 @@ class ElmoEmbedder:
             with tf.compat.v1.Session(graph=self.graph) as sess:
                 sess.run(tf.compat.v1.global_variables_initializer())
                 sess.run(tf.compat.v1.tables_initializer())
-                layers = self.elmo_model(inputs=batch_inputs, signature="tokens", as_dict=True)
+                layers = self.elmo_model(
+                    inputs=batch_inputs, signature="tokens", as_dict=True
+                )
                 # (batch_size, max_length, 512)
                 char_cnn = sess.run(layers["word_emb"])
                 # (batch_size, max_length, 1024)
@@ -51,6 +53,10 @@ class ElmoEmbedder:
                 char_cnn = tf.concat([char_cnn, char_cnn], axis=-1)
                 # (batch_size, 3, max_length, 1024)
                 embeddings = tf.concat(
-                    [tf.expand_dims(layer, axis=1) for layer in [char_cnn, lstm1, lstm2]], axis=1
+                    [
+                        tf.expand_dims(layer, axis=1)
+                        for layer in [char_cnn, lstm1, lstm2]
+                    ],
+                    axis=1,
                 ).eval()
                 return embeddings
