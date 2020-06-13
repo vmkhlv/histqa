@@ -15,7 +15,7 @@ The repository is structured as follows.
 
 * models:
     - elmo.py: the embedder for DeepPavlov ELMo trained on Wikipedia;
-    - histqanet.py: single-hop QA model;
+    - model.py: single-hop QA model;
     - morph.py: morphology-based algorithm for automatic NER annotation;
     - ner.py: domain-specific NER model;
     - utils.py: supplementary \& preprocessing functions;
