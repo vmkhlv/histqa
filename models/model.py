@@ -129,7 +129,7 @@ class NodeClassifier(torch.nn.Module):
         self.hidden_dim1 = hidden_dim1
         self.hidden_dim2 = hidden_dim2
         self.output_dim = output_dim
-        self.batch_size = batch_size
+        self.batch_shape = batch_shape
         self.max_candidates = max_candidates
         self.max_nodes = max_nodes
         self.fc1 = torch.nn.Linear(input_dim, hidden_dim1)
@@ -146,7 +146,7 @@ class NodeClassifier(torch.nn.Module):
             x2.eq(torch.tensor(0, dtype=torch.float32)),
             torch.from_numpy(
                 (
-                    np.ones((self.batch_size, self.max_candidates, self.max_nodes))
+                    np.ones((self.batch_shape, self.max_candidates, self.max_nodes))
                     * -np.inf
                 ).astype(np.float32)
             ),
@@ -158,19 +158,20 @@ class NodeClassifier(torch.nn.Module):
 
 class HistQANet(torch.nn.Module):
     def __init__(
-        self, max_nodes=250, max_query_size=25, max_candidates=25, batch_size=32
+        self, max_nodes=250, max_query_size=25, max_candidates=25, batch_shape=32
     ):
         super(HistQANet, self).__init__()
         self.max_nodes = max_nodes
         self.max_query_size = max_query_size
         self.max_candidates = max_candidates
+        self.batch_shape = batch_shape
         self.query_decoder = QueryDecoder(max_query_size=self.max_query_size)
         self.candidate_decoder = CandidateDecoder(max_nodes=self.max_nodes)
         self.rgcn = RGCN()
         self.clf = NodeClassifier(
             max_nodes=self.max_nodes,
             max_candidates=self.max_candidates,
-            batch_size=batch_size,
+            batch_size=self.batch_shape,
         )
 
     def read_batch(self, x):
