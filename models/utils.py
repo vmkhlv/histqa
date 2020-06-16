@@ -38,8 +38,7 @@ def clean_text(text):
     }
     for rep in rep_keys:
         text = text.replace(rep, rep_keys[rep])
-    text = re.sub("\d{2,}", " ", text).replace("\n", "")
-    return text
+    return text.replace("\n", "")
 
 
 @singleton
